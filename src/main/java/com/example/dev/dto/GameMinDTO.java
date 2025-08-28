@@ -2,6 +2,7 @@ package com.example.dev.dto;
 
 
 import com.example.dev.Game;
+import com.example.dev.projections.GameMinProjection;
 
 public class GameMinDTO {
     private Long id;
@@ -11,6 +12,14 @@ public class GameMinDTO {
     private String shortDescription;
 
     public GameMinDTO(){
+    }
+
+    public GameMinDTO(GameMinProjection projection) {
+        this.id = projection.getId();
+        this.title = projection.getTitle();
+        this.year = projection.getYear();
+        this.imgUrl = projection.getImgUrl();
+        this.shortDescription = projection.getShortDescription();
     }
 
 

@@ -3,6 +3,7 @@ package com.example.dev.services;
 import com.example.dev.Game;
 import com.example.dev.dto.GameDTO;
 import com.example.dev.dto.GameMinDTO;
+import com.example.dev.projections.GameMinProjection;
 import com.example.dev.repositories.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,6 +26,12 @@ public class GameService {
     @Transactional(readOnly = true)
     public List<GameMinDTO> findAll() {
         List<Game> result = gameRepository.findAll();
+        return result.stream().map(GameMinDTO::new).toList();
+    }
+
+    @Transactional(readOnly = true)
+    public List<GameMinDTO> findbyList(Long listId) {
+        List<GameMinProjection> result = gameRepository.searchByList(listId);
         return result.stream().map(GameMinDTO::new).toList();
     }
 }
